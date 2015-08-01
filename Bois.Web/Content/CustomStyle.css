@@ -1,0 +1,66 @@
+﻿table {
+    margin: auto 0;
+}
+
+th {
+    text-align: left;
+}
+
+.nameCol {
+    width: auto;
+}
+
+.locationCol {
+    width: auto;
+}
+
+.selectCol {
+    width: 30px;
+}
+
+.display {
+    width:auto;
+  max-width:1100px;
+    margin: auto ;
+   
+   
+   
+}
+
+    .display label {
+        display: inline-block;
+        /*width: 150px;*/
+    }
+
+input, textarea, #address, #editAdresse {
+    display: inline-block;
+    width: 250px;
+}
+
+    input[type=radio] {
+        display: inline-block;
+        width: 250px;
+    }
+
+#labError {
+    display: inline-block;
+    width: auto;
+}
+
+.ladate, .ladate2 {
+    display: inline-block;
+    width: 250px;
+}
+
+table.dataTable tbody tr.selected {
+    background-color: #B0BED9;
+     
+}
+
+table.dataTable {
+border: 1px solid #aaaaaa;
+}
+
+select{
+  width: auto;
+}

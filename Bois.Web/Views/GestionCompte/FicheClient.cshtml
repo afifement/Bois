@@ -1,0 +1,145 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/CustomStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/GestionCompte/FicheClient.js"></script>  
+ 
+
+
+<section class="content-header">
+    <h1>
+        Gestion client
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"> Fiche client</a></li>
+    </ol>
+</section>
+
+
+<section class="content">
+
+    <div class="row">
+         
+        <div class="box box-primary">
+ 
+            @*Grille principale de la liste de clients*@
+            <div id="summaryDisplay" class="display" style="display:none; ">
+                <div class="box-header">
+                    <h3 class="box-title">Gestion de la liste de fiches clients</h3>
+                </div>
+                <table id="tblclient" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Numéro de sécurité sociale</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Adresse</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableClientBody"></tbody>
+                </table>
+                <label style="color:red; display:none" id="labErrStep1">Merci de choisir une fiche client pour l'éditer</label>
+                <div id="buttonContainer">
+                    <button id="btnaddclient" class="btn bg-purple btn-flat margin">Ajouter</button>
+                    <button id="btneditclient" class="btn btn-primary margin">Mise à jour</button>
+                    <button id="btndeleteclient" class="btn  btn-danger margin">Supprimer</button>
+                    <button id="btnclientDocuments" class="btn  btn-info margin">Liste des documents</button>
+                </div>
+            </div> 
+
+            @*Formulaire d'ajout/Modification de fiche client*@
+            <div id="step2Display" class="display" style="display:none">
+                <div class="box-header">
+                    <h3 class="box-title">Veuillez vérifier/Ajouter les détails de la fiche</h3>
+                </div>
+                <form id="editForm">
+
+                    <input id="identificateur" type="hidden" name="id" />
+                    <p><label>Numéro cnss </label><input id="cnss" name="cnss" class="fiche" /><label style="color:red" id="labError"> ( * )</label></p>
+                    <p><label>Nom </label><input id="lastname" name="lastname" class="fiche" /><label style="color:red" id="labError"> ( * )</label></p>
+                    <p><label>Prénom </label><input id="firstname" name="firstname" class="fiche" /><label style="color:red" id="labError"> ( * )</label></p>
+                    <p><label>Adresse   </label> @Html.TextArea("address", new { id = "address", @class = "fiche" })<label style="color:red" id="labError"> ( * )</label></p>
+                    <p>
+                        <label>Date de naissance   </label>  <i class="fa fa-calendar"></i> <input type="text" id="birth_date" name="birth_date" class="ladate" />
+                    </p>
+
+                    <p><label>Lieu de naissance </label><input id="birth_place" name="birth_place" class="fiche" /> </p>
+                    <p><label>Mutuelle </label><input id="mutuelle" name="mutuelle" class="fiche" /><label style="color:red" id="labError"> ( * )</label></p>
+                    <p><label>Caisse d'assurance maladie </label><input id="caisse_assu_maladie" name="caisse_assu_maladie" class="fiche" /><label style="color:red" id="labError"> ( * )</label></p>
+
+                    <p>
+                        <label>Type de client   </label>
+                        <select id="client_type" name="client_type">
+                            <option value="transport régulière sur une période">demande de transport régulière sur une période</option>
+                            <option value="transport régulière et indéfinie">demande de transport régulière et indéfinie</option>
+                            <option value="Ponctuel ">Ponctuel </option>
+                        </select>
+                    </p>
+
+                </form>
+                <button id="btnStepTwo" type="submit" class="btn btn-primary">Enregister</button>
+                <button type="submit" class="btn bg-maroon btn-flat margin" id="Annuler">Annuler</button>
+
+            </div>
+
+            <div id="clientDocumentsDisplay" class="display" style="display:none; ">
+                <div class="box-header">
+                    <h3>Liste de documents </h3>
+                </div>
+                <div class="box-body">
+                    <table id="tblclientDocuments" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Nom document</th>
+                                <th>Type document</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tableclientDocumentsBody"></tbody>
+
+                    </table>
+                    <div id="clientDocumentsbuttonContainer">
+                        <button id="btnaddclientDocument" class="btn bg-purple btn-flat margin">Ajouter</button>
+                        <button id="btndeleteclientDocument" class="btn  btn-danger margin">Supprimer</button>
+                        <button id="btnviewclientDocument" class="btn  btn-info margin">Télécharger</button>
+                        <button type="submit" class="btn bg-maroon btn-flat margin" id="Annuler">Retour à la liste de clients</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="addclientDocumentDisplay" class="display" style="display: none;">
+                <div class="box-header">
+                    <h3>Veuillez Ajouter les détails du document  </h3>
+                </div>
+
+                <form id="addclientDocumentForm" enctype="multipart/form-data">
+
+                    <input id="iddocument" type="hidden" name="id" />
+                    <p><label>Nom document   </label> <input id="document_name" name="document_name" class="docinput" /> </p>
+                    <p><label>Type document   </label> <input id="document_type" name="document_type" class="docinput" /> </p>
+                    <p> <input type="file" id="documentContent" name="documentContent" class="docinput" /> </p>
+
+                </form>
+
+                <button type="submit" class="btn btn-primary" id="btnfileStepTwo">Enregistrer</button>
+                <button type="submit" class="btn bg-maroon btn-flat margin" id="btnfileCancel">Retour à la liste de documents</button>
+
+
+            </div>
+              </div>
+
+             
+        </div>
+
+         
+
+</section>
+
+
+

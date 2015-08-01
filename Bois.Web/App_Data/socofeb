@@ -1,0 +1,913 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.0.27-community-nt
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema bdsocofeb
+--
+
+CREATE DATABASE IF NOT EXISTS bdsocofeb;
+USE bdsocofeb;
+
+--
+-- Definition of table `acompte`
+--
+
+DROP TABLE IF EXISTS `acompte`;
+CREATE TABLE `acompte` (
+  `idAcompteClient` int(11) NOT NULL auto_increment,
+  `banque` varchar(255) default NULL,
+  `dateACompte` varchar(255) default NULL,
+  `dateEcheance` varchar(255) default NULL,
+  `encaisse` tinyint(1) default '0',
+  `modePayment` varchar(255) default NULL,
+  `montant` float default NULL,
+  `numChequeTraite` varchar(255) default NULL,
+  `porteur` varchar(255) default NULL,
+  `proprietaire` varchar(255) default NULL,
+  PRIMARY KEY  (`idAcompteClient`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `acompte`
+--
+
+/*!40000 ALTER TABLE `acompte` DISABLE KEYS */;
+/*!40000 ALTER TABLE `acompte` ENABLE KEYS */;
+
+
+--
+-- Definition of table `acomptefournisseur`
+--
+
+DROP TABLE IF EXISTS `acomptefournisseur`;
+CREATE TABLE `acomptefournisseur` (
+  `idAcompteFournisseur` int(11) NOT NULL auto_increment,
+  `banque` varchar(255) default NULL,
+  `date` varchar(255) default NULL,
+  `dateEcheance` varchar(255) default NULL,
+  `encaisse` tinyint(1) default '0',
+  `modePayment` varchar(255) default NULL,
+  `montant` float default NULL,
+  `numChequeTraite` varchar(255) default NULL,
+  `proprietaire` varchar(255) default NULL,
+  `FOURNISSEUR_idPersonne` int(11) default NULL,
+  PRIMARY KEY  (`idAcompteFournisseur`),
+  KEY `FK_acompteFournisseur_FOURNISSEUR_idPersonne` (`FOURNISSEUR_idPersonne`),
+  CONSTRAINT `FK_acompteFournisseur_FOURNISSEUR_idPersonne` FOREIGN KEY (`FOURNISSEUR_idPersonne`) REFERENCES `personne` (`idPersonne`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `acomptefournisseur`
+--
+
+/*!40000 ALTER TABLE `acomptefournisseur` DISABLE KEYS */;
+/*!40000 ALTER TABLE `acomptefournisseur` ENABLE KEYS */;
+
+
+--
+-- Definition of table `acomptepersonnel`
+--
+
+DROP TABLE IF EXISTS `acomptepersonnel`;
+CREATE TABLE `acomptepersonnel` (
+  `IDACOMPTEPERSONNEL` int(11) NOT NULL auto_increment,
+  `ARCHIVE` tinyint(1) default '0',
+  `DATEACOMPTE` varchar(255) default NULL,
+  `MONTANTACOMPTE` float default NULL,
+  `SOLDERESTANT` float default NULL,
+  PRIMARY KEY  (`IDACOMPTEPERSONNEL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `acomptepersonnel`
+--
+
+/*!40000 ALTER TABLE `acomptepersonnel` DISABLE KEYS */;
+/*!40000 ALTER TABLE `acomptepersonnel` ENABLE KEYS */;
+
+
+--
+-- Definition of table `adresse`
+--
+
+DROP TABLE IF EXISTS `adresse`;
+CREATE TABLE `adresse` (
+  `idAdresse` int(11) NOT NULL,
+  `codePostal` varchar(255) default NULL,
+  `gouvernorat` varchar(255) default NULL,
+  `rue` varchar(255) default NULL,
+  `ville` varchar(255) default NULL,
+  PRIMARY KEY  (`idAdresse`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `adresse`
+--
+
+/*!40000 ALTER TABLE `adresse` DISABLE KEYS */;
+INSERT INTO `adresse` (`idAdresse`,`codePostal`,`gouvernorat`,`rue`,`ville`) VALUES 
+ (1,'','Tunis','',''),
+ (2,'','Tunis','','');
+/*!40000 ALTER TABLE `adresse` ENABLE KEYS */;
+
+
+--
+-- Definition of table `article`
+--
+
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+  `idArticle` int(11) NOT NULL auto_increment,
+  `aBonEntree` tinyint(1) default '0',
+  `dateArticle` varchar(255) default NULL,
+  `montantHT` float default NULL,
+  `montantTTC` float default NULL,
+  `prixAchatHT` float default NULL,
+  `prixVenteHT` float default NULL,
+  `prixVenteTTC` float default NULL,
+  `quantite` float default NULL,
+  `refPaquet` varchar(255) default NULL,
+  `remise` float default NULL,
+  `unite` varchar(255) default NULL,
+  `CATEGORIE_refCategorie` varchar(255) default NULL,
+  `CHOIX_ID` int(11) default NULL,
+  `FOURNISSEUR_idPersonne` int(11) default NULL,
+  `MARQUE_ID` int(11) default NULL,
+  `REFARTICLE_refArticle` varchar(255) default NULL,
+  `SITE_ID` int(11) default NULL,
+  `SOUSCATEGORIE_refSousCategorie` varchar(255) default NULL,
+  PRIMARY KEY  (`idArticle`),
+  KEY `FK_article_MARQUE_ID` (`MARQUE_ID`),
+  KEY `FK_article_REFARTICLE_refArticle` (`REFARTICLE_refArticle`),
+  KEY `FK_article_CATEGORIE_refCategorie` (`CATEGORIE_refCategorie`),
+  KEY `FK_article_FOURNISSEUR_idPersonne` (`FOURNISSEUR_idPersonne`),
+  KEY `FK_article_CHOIX_ID` (`CHOIX_ID`),
+  KEY `FK_article_SOUSCATEGORIE_refSousCategorie` (`SOUSCATEGORIE_refSousCategorie`),
+  KEY `FK_article_SITE_ID` (`SITE_ID`),
+  CONSTRAINT `FK_article_CATEGORIE_refCategorie` FOREIGN KEY (`CATEGORIE_refCategorie`) REFERENCES `categorie` (`refCategorie`),
+  CONSTRAINT `FK_article_CHOIX_ID` FOREIGN KEY (`CHOIX_ID`) REFERENCES `choix` (`ID`),
+  CONSTRAINT `FK_article_FOURNISSEUR_idPersonne` FOREIGN KEY (`FOURNISSEUR_idPersonne`) REFERENCES `personne` (`idPersonne`),
+  CONSTRAINT `FK_article_MARQUE_ID` FOREIGN KEY (`MARQUE_ID`) REFERENCES `marque` (`ID`),
+  CONSTRAINT `FK_article_REFARTICLE_refArticle` FOREIGN KEY (`REFARTICLE_refArticle`) REFERENCES `referencearticle` (`refArticle`),
+  CONSTRAINT `FK_article_SITE_ID` FOREIGN KEY (`SITE_ID`) REFERENCES `site` (`ID`),
+  CONSTRAINT `FK_article_SOUSCATEGORIE_refSousCategorie` FOREIGN KEY (`SOUSCATEGORIE_refSousCategorie`) REFERENCES `souscategorie` (`refSousCategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `article`
+--
+
+/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+/*!40000 ALTER TABLE `article` ENABLE KEYS */;
+
+
+--
+-- Definition of table `articlesachetes`
+--
+
+DROP TABLE IF EXISTS `articlesachetes`;
+CREATE TABLE `articlesachetes` (
+  `id` int(11) NOT NULL auto_increment,
+  `NBREPIECES` float default NULL,
+  `PUHT` float default NULL,
+  `QUANTITE` float default NULL,
+  `REMISE` float default NULL,
+  `CATEGORIE_refCategorie` varchar(255) default NULL,
+  `CHOIX_ID` int(11) default NULL,
+  `MARQUE_ID` int(11) default NULL,
+  `REFARTICLE_refArticle` varchar(255) default NULL,
+  `SOUSCATEGORIE_refSousCategorie` varchar(255) default NULL,
+  `UNITE_ID` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FK_ArticlesAchetes_SOUSCATEGORIE_refSousCategorie` (`SOUSCATEGORIE_refSousCategorie`),
+  KEY `FK_ArticlesAchetes_UNITE_ID` (`UNITE_ID`),
+  KEY `FK_ArticlesAchetes_CATEGORIE_refCategorie` (`CATEGORIE_refCategorie`),
+  KEY `FK_ArticlesAchetes_REFARTICLE_refArticle` (`REFARTICLE_refArticle`),
+  KEY `FK_ArticlesAchetes_MARQUE_ID` (`MARQUE_ID`),
+  KEY `FK_ArticlesAchetes_CHOIX_ID` (`CHOIX_ID`),
+  CONSTRAINT `FK_ArticlesAchetes_CATEGORIE_refCategorie` FOREIGN KEY (`CATEGORIE_refCategorie`) REFERENCES `categorie` (`refCategorie`),
+  CONSTRAINT `FK_ArticlesAchetes_CHOIX_ID` FOREIGN KEY (`CHOIX_ID`) REFERENCES `choix` (`ID`),
+  CONSTRAINT `FK_ArticlesAchetes_MARQUE_ID` FOREIGN KEY (`MARQUE_ID`) REFERENCES `marque` (`ID`),
+  CONSTRAINT `FK_ArticlesAchetes_REFARTICLE_refArticle` FOREIGN KEY (`REFARTICLE_refArticle`) REFERENCES `referencearticle` (`refArticle`),
+  CONSTRAINT `FK_ArticlesAchetes_SOUSCATEGORIE_refSousCategorie` FOREIGN KEY (`SOUSCATEGORIE_refSousCategorie`) REFERENCES `souscategorie` (`refSousCategorie`),
+  CONSTRAINT `FK_ArticlesAchetes_UNITE_ID` FOREIGN KEY (`UNITE_ID`) REFERENCES `unite` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `articlesachetes`
+--
+
+/*!40000 ALTER TABLE `articlesachetes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `articlesachetes` ENABLE KEYS */;
+
+
+--
+-- Definition of table `articlesachetes_lougueurs`
+--
+
+DROP TABLE IF EXISTS `articlesachetes_lougueurs`;
+CREATE TABLE `articlesachetes_lougueurs` (
+  `ArticlesAchetes_id` int(11) NOT NULL,
+  `listLongueurs_idLongueur` int(11) NOT NULL,
+  PRIMARY KEY  (`ArticlesAchetes_id`,`listLongueurs_idLongueur`),
+  KEY `ArticlesAchetes_lougueurs_listLongueurs_idLongueur` (`listLongueurs_idLongueur`),
+  CONSTRAINT `ArticlesAchetes_lougueurs_listLongueurs_idLongueur` FOREIGN KEY (`listLongueurs_idLongueur`) REFERENCES `lougueurs` (`idLongueur`),
+  CONSTRAINT `FK_ArticlesAchetes_lougueurs_ArticlesAchetes_id` FOREIGN KEY (`ArticlesAchetes_id`) REFERENCES `articlesachetes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `articlesachetes_lougueurs`
+--
+
+/*!40000 ALTER TABLE `articlesachetes_lougueurs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `articlesachetes_lougueurs` ENABLE KEYS */;
+
+
+--
+-- Definition of table `banque`
+--
+
+DROP TABLE IF EXISTS `banque`;
+CREATE TABLE `banque` (
+  `IDBANQUE` int(11) NOT NULL auto_increment,
+  `CODEBANQUE` varchar(255) default NULL,
+  `NOMBANQUE` varchar(255) default NULL,
+  PRIMARY KEY  (`IDBANQUE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `banque`
+--
+
+/*!40000 ALTER TABLE `banque` DISABLE KEYS */;
+/*!40000 ALTER TABLE `banque` ENABLE KEYS */;
+
+
+--
+-- Definition of table `bon`
+--
+
+DROP TABLE IF EXISTS `bon`;
+CREATE TABLE `bon` (
+  `ID` int(11) NOT NULL auto_increment,
+  `DTYPE` varchar(31) default NULL,
+  `DATEBON` varchar(255) default NULL,
+  `ESTPAYE` tinyint(1) default '0',
+  `MODEPAYEMENT` varchar(255) default NULL,
+  `TOTTTC` float default NULL,
+  `TOTTVA` float default NULL,
+  `TOTALBRUT` float default NULL,
+  `TOTALHT` float default NULL,
+  `TOTALREMISE` float default NULL,
+  `ESTFACTURE` tinyint(1) default '0',
+  `NUMBL` varchar(255) default NULL,
+  `ESTLIVREE` tinyint(1) default '0',
+  `NUMBC` varchar(255) default NULL,
+  `NBREDUPLICATA` int(11) default NULL,
+  `NUMFACT` varchar(255) default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bon`
+--
+
+/*!40000 ALTER TABLE `bon` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bon` ENABLE KEYS */;
+
+
+--
+-- Definition of table `bon_articlesachetes`
+--
+
+DROP TABLE IF EXISTS `bon_articlesachetes`;
+CREATE TABLE `bon_articlesachetes` (
+  `Bon_ID` int(11) NOT NULL,
+  `articlesAchetes_id` int(11) NOT NULL,
+  PRIMARY KEY  (`Bon_ID`,`articlesAchetes_id`),
+  KEY `FK_Bon_ArticlesAchetes_articlesAchetes_id` (`articlesAchetes_id`),
+  CONSTRAINT `FK_Bon_ArticlesAchetes_articlesAchetes_id` FOREIGN KEY (`articlesAchetes_id`) REFERENCES `articlesachetes` (`id`),
+  CONSTRAINT `FK_Bon_ArticlesAchetes_Bon_ID` FOREIGN KEY (`Bon_ID`) REFERENCES `bon` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bon_articlesachetes`
+--
+
+/*!40000 ALTER TABLE `bon_articlesachetes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bon_articlesachetes` ENABLE KEYS */;
+
+
+--
+-- Definition of table `bonentree`
+--
+
+DROP TABLE IF EXISTS `bonentree`;
+CREATE TABLE `bonentree` (
+  `idBonEntree` int(11) NOT NULL auto_increment,
+  `dateBonEntree` varchar(255) default NULL,
+  `estFacture` tinyint(1) default '0',
+  `netAPayer` float default NULL,
+  `numBonEntree` varchar(255) default NULL,
+  `totalBrut` float default NULL,
+  `totalHT` float default NULL,
+  `totalRemise` float default NULL,
+  `totalTTC` float default NULL,
+  `totalTVA` float default NULL,
+  `FOURNISSER_idPersonne` int(11) default NULL,
+  PRIMARY KEY  (`idBonEntree`),
+  KEY `FK_BonEntree_FOURNISSER_idPersonne` (`FOURNISSER_idPersonne`),
+  CONSTRAINT `FK_BonEntree_FOURNISSER_idPersonne` FOREIGN KEY (`FOURNISSER_idPersonne`) REFERENCES `personne` (`idPersonne`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bonentree`
+--
+
+/*!40000 ALTER TABLE `bonentree` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bonentree` ENABLE KEYS */;
+
+
+--
+-- Definition of table `bonentree_article`
+--
+
+DROP TABLE IF EXISTS `bonentree_article`;
+CREATE TABLE `bonentree_article` (
+  `BonEntree_idBonEntree` int(11) NOT NULL,
+  `articles_idArticle` int(11) NOT NULL,
+  PRIMARY KEY  (`BonEntree_idBonEntree`,`articles_idArticle`),
+  KEY `FK_BonEntree_article_articles_idArticle` (`articles_idArticle`),
+  CONSTRAINT `FK_BonEntree_article_articles_idArticle` FOREIGN KEY (`articles_idArticle`) REFERENCES `article` (`idArticle`),
+  CONSTRAINT `FK_BonEntree_article_BonEntree_idBonEntree` FOREIGN KEY (`BonEntree_idBonEntree`) REFERENCES `bonentree` (`idBonEntree`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bonentree_article`
+--
+
+/*!40000 ALTER TABLE `bonentree_article` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bonentree_article` ENABLE KEYS */;
+
+
+--
+-- Definition of table `categorie`
+--
+
+DROP TABLE IF EXISTS `categorie`;
+CREATE TABLE `categorie` (
+  `refCategorie` varchar(255) NOT NULL,
+  `designationRef` varchar(255) default NULL,
+  PRIMARY KEY  (`refCategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `categorie`
+--
+
+/*!40000 ALTER TABLE `categorie` DISABLE KEYS */;
+INSERT INTO `categorie` (`refCategorie`,`designationRef`) VALUES 
+ ('bois','bois');
+/*!40000 ALTER TABLE `categorie` ENABLE KEYS */;
+
+
+--
+-- Definition of table `categorie_souscategorie`
+--
+
+DROP TABLE IF EXISTS `categorie_souscategorie`;
+CREATE TABLE `categorie_souscategorie` (
+  `Categorie_refCategorie` varchar(255) NOT NULL,
+  `sousCategories_refSousCategorie` varchar(255) NOT NULL,
+  PRIMARY KEY  (`Categorie_refCategorie`,`sousCategories_refSousCategorie`),
+  KEY `ctegoriesouscategoriesusCategoriesrefSousCategorie` (`sousCategories_refSousCategorie`),
+  CONSTRAINT `ctegoriesouscategoriesusCategoriesrefSousCategorie` FOREIGN KEY (`sousCategories_refSousCategorie`) REFERENCES `souscategorie` (`refSousCategorie`),
+  CONSTRAINT `FK_categorie_souscategorie_Categorie_refCategorie` FOREIGN KEY (`Categorie_refCategorie`) REFERENCES `categorie` (`refCategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `categorie_souscategorie`
+--
+
+/*!40000 ALTER TABLE `categorie_souscategorie` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categorie_souscategorie` ENABLE KEYS */;
+
+
+--
+-- Definition of table `choix`
+--
+
+DROP TABLE IF EXISTS `choix`;
+CREATE TABLE `choix` (
+  `ID` int(11) NOT NULL auto_increment,
+  `CODECHOIX` varchar(255) default NULL,
+  `LIBELLE` varchar(255) default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `choix`
+--
+
+/*!40000 ALTER TABLE `choix` DISABLE KEYS */;
+/*!40000 ALTER TABLE `choix` ENABLE KEYS */;
+
+
+--
+-- Definition of table `encaissementclient`
+--
+
+DROP TABLE IF EXISTS `encaissementclient`;
+CREATE TABLE `encaissementclient` (
+  `ID` int(11) NOT NULL,
+  `NUMEC` varchar(255) default NULL,
+  `BON_ID` int(11) default NULL,
+  PRIMARY KEY  (`ID`),
+  KEY `FK_ENCAISSEMENTCLIENT_BON_ID` (`BON_ID`),
+  CONSTRAINT `FK_ENCAISSEMENTCLIENT_BON_ID` FOREIGN KEY (`BON_ID`) REFERENCES `bon` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `encaissementclient`
+--
+
+/*!40000 ALTER TABLE `encaissementclient` DISABLE KEYS */;
+/*!40000 ALTER TABLE `encaissementclient` ENABLE KEYS */;
+
+
+--
+-- Definition of table `encaissementclient_acompte`
+--
+
+DROP TABLE IF EXISTS `encaissementclient_acompte`;
+CREATE TABLE `encaissementclient_acompte` (
+  `EncaissementClient_ID` int(11) NOT NULL,
+  `aComptes_idAcompteClient` int(11) NOT NULL,
+  PRIMARY KEY  (`EncaissementClient_ID`,`aComptes_idAcompteClient`),
+  KEY `ENCAISSEMENTCLIENT_acompteaComptes_idAcompteClient` (`aComptes_idAcompteClient`),
+  CONSTRAINT `ENCAISSEMENTCLIENT_acompteaComptes_idAcompteClient` FOREIGN KEY (`aComptes_idAcompteClient`) REFERENCES `acompte` (`idAcompteClient`),
+  CONSTRAINT `ENCAISSEMENTCLIENT_acompte_EncaissementClient_ID` FOREIGN KEY (`EncaissementClient_ID`) REFERENCES `encaissementclient` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `encaissementclient_acompte`
+--
+
+/*!40000 ALTER TABLE `encaissementclient_acompte` DISABLE KEYS */;
+/*!40000 ALTER TABLE `encaissementclient_acompte` ENABLE KEYS */;
+
+
+--
+-- Definition of table `lougueurs`
+--
+
+DROP TABLE IF EXISTS `lougueurs`;
+CREATE TABLE `lougueurs` (
+  `idLongueur` int(11) NOT NULL auto_increment,
+  `longueur` float default NULL,
+  `nbrePieces` int(11) default NULL,
+  `totalLongueur` float default NULL,
+  PRIMARY KEY  (`idLongueur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lougueurs`
+--
+
+/*!40000 ALTER TABLE `lougueurs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lougueurs` ENABLE KEYS */;
+
+
+--
+-- Definition of table `marque`
+--
+
+DROP TABLE IF EXISTS `marque`;
+CREATE TABLE `marque` (
+  `ID` int(11) NOT NULL auto_increment,
+  `CODEMARQUE` varchar(255) default NULL,
+  `LIBELLE` varchar(255) default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `marque`
+--
+
+/*!40000 ALTER TABLE `marque` DISABLE KEYS */;
+/*!40000 ALTER TABLE `marque` ENABLE KEYS */;
+
+
+--
+-- Definition of table `modepayement`
+--
+
+DROP TABLE IF EXISTS `modepayement`;
+CREATE TABLE `modepayement` (
+  `IDMODEPAYEMENT` int(11) NOT NULL auto_increment,
+  `libelleMode` varchar(255) default NULL,
+  PRIMARY KEY  (`IDMODEPAYEMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `modepayement`
+--
+
+/*!40000 ALTER TABLE `modepayement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `modepayement` ENABLE KEYS */;
+
+
+--
+-- Definition of table `personne`
+--
+
+DROP TABLE IF EXISTS `personne`;
+CREATE TABLE `personne` (
+  `idPersonne` int(11) NOT NULL auto_increment,
+  `DTYPE` varchar(31) default NULL,
+  `banque` varchar(255) default NULL,
+  `mail` varchar(255) default NULL,
+  `fax` varchar(255) default NULL,
+  `matriculeFiscal` varchar(255) default NULL,
+  `mobile1` varchar(255) default NULL,
+  `mobile2` varchar(255) default NULL,
+  `rib` varchar(255) default NULL,
+  `telephonefix` varchar(255) default NULL,
+  `ADRESSE_idAdresse` int(11) default NULL,
+  `aContacter` varchar(255) default NULL,
+  `assujettessiment` varchar(255) default NULL,
+  `cheminCIN` varchar(255) default NULL,
+  `cheminDossierJuridique` varchar(255) default NULL,
+  `maxRemise` float default NULL,
+  `numRegistreCommerce` varchar(255) default NULL,
+  `plafondDebit` float default NULL,
+  `raisonSociale` varchar(255) default NULL,
+  `fonction` varchar(255) default NULL,
+  `nomContact` varchar(255) default NULL,
+  `nomSociete` varchar(255) default NULL,
+  `plafondCredit` float default NULL,
+  PRIMARY KEY  (`idPersonne`),
+  KEY `FK_personne_ADRESSE_idAdresse` (`ADRESSE_idAdresse`),
+  CONSTRAINT `FK_personne_ADRESSE_idAdresse` FOREIGN KEY (`ADRESSE_idAdresse`) REFERENCES `adresse` (`idAdresse`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `personne`
+--
+
+/*!40000 ALTER TABLE `personne` DISABLE KEYS */;
+INSERT INTO `personne` (`idPersonne`,`DTYPE`,`banque`,`mail`,`fax`,`matriculeFiscal`,`mobile1`,`mobile2`,`rib`,`telephonefix`,`ADRESSE_idAdresse`,`aContacter`,`assujettessiment`,`cheminCIN`,`cheminDossierJuridique`,`maxRemise`,`numRegistreCommerce`,`plafondDebit`,`raisonSociale`,`fonction`,`nomContact`,`nomSociete`,`plafondCredit`) VALUES 
+ (1,'Client','Al Baraka (Baraka)','','','','','','','azdazda',1,'Lui même','Assujetti','','',3,'',0,'dsqd',NULL,NULL,NULL,NULL),
+ (2,'Fournisseur','Al Baraka (Baraka)','','','','','','','',2,NULL,'Assujetti','','',0,'',NULL,NULL,NULL,'F1','F1',0);
+/*!40000 ALTER TABLE `personne` ENABLE KEYS */;
+
+
+--
+-- Definition of table `personne_bon`
+--
+
+DROP TABLE IF EXISTS `personne_bon`;
+CREATE TABLE `personne_bon` (
+  `Client_idPersonne` int(11) NOT NULL,
+  `listBons_ID` int(11) NOT NULL,
+  PRIMARY KEY  (`Client_idPersonne`,`listBons_ID`),
+  KEY `FK_personne_Bon_listBons_ID` (`listBons_ID`),
+  CONSTRAINT `FK_personne_Bon_Client_idPersonne` FOREIGN KEY (`Client_idPersonne`) REFERENCES `personne` (`idPersonne`),
+  CONSTRAINT `FK_personne_Bon_listBons_ID` FOREIGN KEY (`listBons_ID`) REFERENCES `bon` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `personne_bon`
+--
+
+/*!40000 ALTER TABLE `personne_bon` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personne_bon` ENABLE KEYS */;
+
+
+--
+-- Definition of table `personne_encaissementclient`
+--
+
+DROP TABLE IF EXISTS `personne_encaissementclient`;
+CREATE TABLE `personne_encaissementclient` (
+  `Client_idPersonne` int(11) NOT NULL,
+  `encaissementClients_ID` int(11) NOT NULL,
+  PRIMARY KEY  (`Client_idPersonne`,`encaissementClients_ID`),
+  KEY `personne_ENCAISSEMENTCLIENT_encaissementClients_ID` (`encaissementClients_ID`),
+  CONSTRAINT `FK_personne_ENCAISSEMENTCLIENT_Client_idPersonne` FOREIGN KEY (`Client_idPersonne`) REFERENCES `personne` (`idPersonne`),
+  CONSTRAINT `personne_ENCAISSEMENTCLIENT_encaissementClients_ID` FOREIGN KEY (`encaissementClients_ID`) REFERENCES `encaissementclient` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `personne_encaissementclient`
+--
+
+/*!40000 ALTER TABLE `personne_encaissementclient` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personne_encaissementclient` ENABLE KEYS */;
+
+
+--
+-- Definition of table `personne_modepayement`
+--
+
+DROP TABLE IF EXISTS `personne_modepayement`;
+CREATE TABLE `personne_modepayement` (
+  `Client_idPersonne` int(11) NOT NULL,
+  `payementClients_IDMODEPAYEMENT` int(11) NOT NULL,
+  `Fournisseur_idPersonne` int(11) NOT NULL,
+  PRIMARY KEY  (`Client_idPersonne`,`payementClients_IDMODEPAYEMENT`,`Fournisseur_idPersonne`),
+  KEY `FK_personne_ModePayement_Fournisseur_idPersonne` (`Fournisseur_idPersonne`),
+  KEY `personneModePayementpayementClients_IDMODEPAYEMENT` (`payementClients_IDMODEPAYEMENT`),
+  CONSTRAINT `FK_personne_ModePayement_Client_idPersonne` FOREIGN KEY (`Client_idPersonne`) REFERENCES `personne` (`idPersonne`),
+  CONSTRAINT `FK_personne_ModePayement_Fournisseur_idPersonne` FOREIGN KEY (`Fournisseur_idPersonne`) REFERENCES `personne` (`idPersonne`),
+  CONSTRAINT `personneModePayementpayementClients_IDMODEPAYEMENT` FOREIGN KEY (`payementClients_IDMODEPAYEMENT`) REFERENCES `modepayement` (`IDMODEPAYEMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `personne_modepayement`
+--
+
+/*!40000 ALTER TABLE `personne_modepayement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personne_modepayement` ENABLE KEYS */;
+
+
+--
+-- Definition of table `personnel`
+--
+
+DROP TABLE IF EXISTS `personnel`;
+CREATE TABLE `personnel` (
+  `IDPERSONNEL` int(11) NOT NULL auto_increment,
+  `CHEMINCIN` varchar(255) default NULL,
+  `CHEMINCOPIECONTRAT` varchar(255) default NULL,
+  `CIN` varchar(255) default NULL,
+  `DATEARRETCONTRAT` varchar(255) default NULL,
+  `DATEEMBAUCHE` varchar(255) default NULL,
+  `FONCTION` varchar(255) default NULL,
+  `NOM` varchar(255) default NULL,
+  `PRENOM` varchar(255) default NULL,
+  `SALAIREDEBASE` float default NULL,
+  PRIMARY KEY  (`IDPERSONNEL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `personnel`
+--
+
+/*!40000 ALTER TABLE `personnel` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personnel` ENABLE KEYS */;
+
+
+--
+-- Definition of table `personnel_acomptepersonnel`
+--
+
+DROP TABLE IF EXISTS `personnel_acomptepersonnel`;
+CREATE TABLE `personnel_acomptepersonnel` (
+  `Personnel_IDPERSONNEL` int(11) NOT NULL,
+  `acomptesPersonnels_IDACOMPTEPERSONNEL` int(11) NOT NULL,
+  PRIMARY KEY  (`Personnel_IDPERSONNEL`,`acomptesPersonnels_IDACOMPTEPERSONNEL`),
+  KEY `PrsnnlcmptPersonnelcmptsPrsnnelsIDACOMPTEPERSONNEL` (`acomptesPersonnels_IDACOMPTEPERSONNEL`),
+  CONSTRAINT `Personnel_AcomptePersonnel_Personnel_IDPERSONNEL` FOREIGN KEY (`Personnel_IDPERSONNEL`) REFERENCES `personnel` (`IDPERSONNEL`),
+  CONSTRAINT `PrsnnlcmptPersonnelcmptsPrsnnelsIDACOMPTEPERSONNEL` FOREIGN KEY (`acomptesPersonnels_IDACOMPTEPERSONNEL`) REFERENCES `acomptepersonnel` (`IDACOMPTEPERSONNEL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `personnel_acomptepersonnel`
+--
+
+/*!40000 ALTER TABLE `personnel_acomptepersonnel` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personnel_acomptepersonnel` ENABLE KEYS */;
+
+
+--
+-- Definition of table `referencearticle`
+--
+
+DROP TABLE IF EXISTS `referencearticle`;
+CREATE TABLE `referencearticle` (
+  `refArticle` varchar(255) NOT NULL,
+  `epaisseur` float default NULL,
+  `largeur` float default NULL,
+  PRIMARY KEY  (`refArticle`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `referencearticle`
+--
+
+/*!40000 ALTER TABLE `referencearticle` DISABLE KEYS */;
+INSERT INTO `referencearticle` (`refArticle`,`epaisseur`,`largeur`) VALUES 
+ ('ref1',0.2,0.1);
+/*!40000 ALTER TABLE `referencearticle` ENABLE KEYS */;
+
+
+--
+-- Definition of table `referencebon`
+--
+
+DROP TABLE IF EXISTS `referencebon`;
+CREATE TABLE `referencebon` (
+  `TYPESEQ` varchar(255) NOT NULL,
+  `LASTSEQ` int(11) default NULL,
+  PRIMARY KEY  (`TYPESEQ`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `referencebon`
+--
+
+/*!40000 ALTER TABLE `referencebon` DISABLE KEYS */;
+/*!40000 ALTER TABLE `referencebon` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sequence`
+--
+
+DROP TABLE IF EXISTS `sequence`;
+CREATE TABLE `sequence` (
+  `SEQ_NAME` varchar(50) NOT NULL,
+  `SEQ_COUNT` decimal(38,0) default NULL,
+  PRIMARY KEY  (`SEQ_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sequence`
+--
+
+/*!40000 ALTER TABLE `sequence` DISABLE KEYS */;
+INSERT INTO `sequence` (`SEQ_NAME`,`SEQ_COUNT`) VALUES 
+ ('SEQ_GEN','50');
+/*!40000 ALTER TABLE `sequence` ENABLE KEYS */;
+
+
+--
+-- Definition of table `site`
+--
+
+DROP TABLE IF EXISTS `site`;
+CREATE TABLE `site` (
+  `ID` int(11) NOT NULL auto_increment,
+  `CODESITE` varchar(255) default NULL,
+  `EMPLACEMENT` varchar(255) default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `site`
+--
+
+/*!40000 ALTER TABLE `site` DISABLE KEYS */;
+/*!40000 ALTER TABLE `site` ENABLE KEYS */;
+
+
+--
+-- Definition of table `souscategorie`
+--
+
+DROP TABLE IF EXISTS `souscategorie`;
+CREATE TABLE `souscategorie` (
+  `refSousCategorie` varchar(255) NOT NULL,
+  `designationSousCategorie` varchar(255) default NULL,
+  PRIMARY KEY  (`refSousCategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `souscategorie`
+--
+
+/*!40000 ALTER TABLE `souscategorie` DISABLE KEYS */;
+INSERT INTO `souscategorie` (`refSousCategorie`,`designationSousCategorie`) VALUES 
+ ('',''),
+ ('bb','bb');
+/*!40000 ALTER TABLE `souscategorie` ENABLE KEYS */;
+
+
+--
+-- Definition of table `souscategorie_referencearticle`
+--
+
+DROP TABLE IF EXISTS `souscategorie_referencearticle`;
+CREATE TABLE `souscategorie_referencearticle` (
+  `SousCategorie_refSousCategorie` varchar(255) NOT NULL,
+  `referenceArticles_refArticle` varchar(255) NOT NULL,
+  PRIMARY KEY  (`SousCategorie_refSousCategorie`,`referenceArticles_refArticle`),
+  KEY `ssctegoriereferencearticlerfrnceArticlesrefArticle` (`referenceArticles_refArticle`),
+  CONSTRAINT `ssctegoriereferencearticlerfrnceArticlesrefArticle` FOREIGN KEY (`referenceArticles_refArticle`) REFERENCES `referencearticle` (`refArticle`),
+  CONSTRAINT `ssctgoriereferencearticleSsCtgorierefSousCategorie` FOREIGN KEY (`SousCategorie_refSousCategorie`) REFERENCES `souscategorie` (`refSousCategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `souscategorie_referencearticle`
+--
+
+/*!40000 ALTER TABLE `souscategorie_referencearticle` DISABLE KEYS */;
+INSERT INTO `souscategorie_referencearticle` (`SousCategorie_refSousCategorie`,`referenceArticles_refArticle`) VALUES 
+ ('bb','ref1');
+/*!40000 ALTER TABLE `souscategorie_referencearticle` ENABLE KEYS */;
+
+
+--
+-- Definition of table `stockvariant`
+--
+
+DROP TABLE IF EXISTS `stockvariant`;
+CREATE TABLE `stockvariant` (
+  `idStockVariant` int(11) NOT NULL auto_increment,
+  `puht` float default NULL,
+  `stockActuel` float default NULL,
+  `stockLivre` float default NULL,
+  `CATEGORIE_refCategorie` varchar(255) default NULL,
+  `CHOIX_ID` int(11) default NULL,
+  `FOURNISSEUR_idPersonne` int(11) default NULL,
+  `MARQUE_ID` int(11) default NULL,
+  `REFERENCEARTICLE_refArticle` varchar(255) default NULL,
+  `SOUSCATEGORIE_refSousCategorie` varchar(255) default NULL,
+  PRIMARY KEY  (`idStockVariant`),
+  KEY `FK_StockVariant_SOUSCATEGORIE_refSousCategorie` (`SOUSCATEGORIE_refSousCategorie`),
+  KEY `FK_StockVariant_CATEGORIE_refCategorie` (`CATEGORIE_refCategorie`),
+  KEY `FK_StockVariant_REFERENCEARTICLE_refArticle` (`REFERENCEARTICLE_refArticle`),
+  KEY `FK_StockVariant_CHOIX_ID` (`CHOIX_ID`),
+  KEY `FK_StockVariant_FOURNISSEUR_idPersonne` (`FOURNISSEUR_idPersonne`),
+  KEY `FK_StockVariant_MARQUE_ID` (`MARQUE_ID`),
+  CONSTRAINT `FK_StockVariant_CATEGORIE_refCategorie` FOREIGN KEY (`CATEGORIE_refCategorie`) REFERENCES `categorie` (`refCategorie`),
+  CONSTRAINT `FK_StockVariant_CHOIX_ID` FOREIGN KEY (`CHOIX_ID`) REFERENCES `choix` (`ID`),
+  CONSTRAINT `FK_StockVariant_FOURNISSEUR_idPersonne` FOREIGN KEY (`FOURNISSEUR_idPersonne`) REFERENCES `personne` (`idPersonne`),
+  CONSTRAINT `FK_StockVariant_MARQUE_ID` FOREIGN KEY (`MARQUE_ID`) REFERENCES `marque` (`ID`),
+  CONSTRAINT `FK_StockVariant_REFERENCEARTICLE_refArticle` FOREIGN KEY (`REFERENCEARTICLE_refArticle`) REFERENCES `referencearticle` (`refArticle`),
+  CONSTRAINT `FK_StockVariant_SOUSCATEGORIE_refSousCategorie` FOREIGN KEY (`SOUSCATEGORIE_refSousCategorie`) REFERENCES `souscategorie` (`refSousCategorie`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stockvariant`
+--
+
+/*!40000 ALTER TABLE `stockvariant` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stockvariant` ENABLE KEYS */;
+
+
+--
+-- Definition of table `taxe`
+--
+
+DROP TABLE IF EXISTS `taxe`;
+CREATE TABLE `taxe` (
+  `ID` int(11) NOT NULL auto_increment,
+  `LIBELLE` varchar(255) default NULL,
+  `TAUX` float default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `taxe`
+--
+
+/*!40000 ALTER TABLE `taxe` DISABLE KEYS */;
+INSERT INTO `taxe` (`ID`,`LIBELLE`,`TAUX`) VALUES 
+ (1,'tax',18);
+/*!40000 ALTER TABLE `taxe` ENABLE KEYS */;
+
+
+--
+-- Definition of table `unite`
+--
+
+DROP TABLE IF EXISTS `unite`;
+CREATE TABLE `unite` (
+  `ID` int(11) NOT NULL auto_increment,
+  `CODEUNITE` varchar(255) default NULL,
+  `LIBELLEUNITE` varchar(255) default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `unite`
+--
+
+/*!40000 ALTER TABLE `unite` DISABLE KEYS */;
+/*!40000 ALTER TABLE `unite` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -23,7 +23,7 @@ namespace Bois.DAL
 
         public IEnumerable<T> GetAll()
         {
-          if(context == null) context = GetContext(); 
+            if (context == null) context = GetContext(); 
             return context.Set<T>().ToList();
         }
 
@@ -89,7 +89,7 @@ namespace Bois.DAL
             {
                 foreach (T item in items)
                 {
-                    
+
                     context.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 }
                 context.SaveChanges();
@@ -128,7 +128,7 @@ namespace Bois.DAL
 
         public DbContext GetContext()
         {
-            DbContext context = new ajtransportEntities1();
+            DbContext context = new bdsocofebEntities1();
             context.Configuration.LazyLoadingEnabled = true;
             return context;
         }

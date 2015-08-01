@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SoCo Feb</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link href="~/Content/ionicons-2.0.1/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-4.3.0/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body class="sidebar-mini wysihtml5-supported skin-blue-light" style="margin: 0px 0px">
+
+    <div class="wrapper">
+
+        <header class="main-header">
+            <a href="" class="logo">
+                <span class="logo-mini"><b>SoCo</b>Feb</span>
+                <span class="logo-lg"><b>SoCo</b>Feb</span>
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                @if (Session["image"] == null)
+                                {
+                                    <img src="~/Content/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Action("getImg", "Home", new { newWidth = 25, newHeight = 25 })" class="user-image" user-image"" alt="User Image" />
+
+                                }
+
+                                <span class="hidden-xs">@User.Identity.Name</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    @if (Session["image"] == null)
+                                    {
+                                        <img src="~/Content/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@Url.Action("getImg", "Home", new { newWidth = 25, newHeight = 25 })" class="user-image" alt="User Image" />
+
+                                    }
+                                    <p>
+                                        @User.Identity.Name
+                                        <small></small>
+                                    </p>
+                                </li>
+
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="~/Account/MonProfil" class="btn btn-default btn-flat">Profil</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="~/Account/LogOff" class="btn btn-default btn-flat">Déconnexion</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!-- static devision -->
+                <div class="middle-logo">
+                    <span class="logo-lg">
+                        <b></b>
+                    </span>
+                </div>
+            </nav>
+        </header>
+        
+        <aside class="main-sidebar">
+             
+            <section class="sidebar">
+                
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        @if (Session["image"] == null)
+                        {
+                            <img src="~/Content/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Action("getImg", "Home", new { newWidth = 90, newHeight = 90 })" class="user-image" alt="User Image" />
+
+                        }
+                    </div>
+                    <div class="pull-left info">
+                        <p>@User.Identity.Name</p>
+                        <a href="~/Account/MonProfil"><i class="fa fa-circle text-success"></i>Online</a>
+                    </div>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li class="header">Menu de navigation</li>
+                    <li class="active treeview">
+                        <a href="~/Home/Index">
+                            <i class="fa fa-dashboard"></i><span>Accueil</span>
+                        </a>
+
+                    </li>
+                    @if (User.IsInRole("chauffeur"))
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i><span>Espace Chauffeur</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li> <a href="~/EspaceChauffeur/Agenda"><i class="fa fa-circle-o"></i>Agenda</a></li>
+                            </ul>
+                            <ul class="treeview-menu">
+                                <li> <a href="~/EspaceChauffeur/Documents"><i class="fa fa-circle-o"></i>Documents demandes</a></li>
+                            </ul>
+                        </li>
+                    }
+
+
+                    @if (User.IsInRole("admin") || User.IsInRole("employe") || User.IsInRole("manager") || User.IsInRole("superadmin"))
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i><span>Gestion client</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li> <a href="~/GestionCompte/FicheClient"><i class="fa fa-circle-o"></i>Fiche client</a></li>
+                            </ul>
+                        </li>
+                    }
+
+
+
+
+                    @if (User.IsInRole("admin") || User.IsInRole("adminpark") || User.IsInRole("manager") || User.IsInRole("superadmin"))
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i><span>Gestion Véhicule</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                
+                                    <li><a href="~/GestionVehicule/FicheVehicule"><i class="fa fa-circle-o"></i>Fiche véhicule</a></li>
+                                  
+                                        <li><a href="~/GestionVehicule/AgendaIntervention"><i class="fa fa-circle-o"></i>Agenda interventions</a></li>
+                             
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("admin") || User.IsInRole("employe") || User.IsInRole("manager") || User.IsInRole("superadmin"))
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i><span>Gestion Demande</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="~/DemandeClient/AjouterDemande"><i class="fa fa-circle-o"></i>Ajouter une demande</a></li>
+                                <li><a href="~/DemandeClient/RechercherDemande"><i class="fa fa-circle-o"></i>Liste des demandes</a></li>
+                                <li><a href="~/DemandeClient/AgendaVehicule"><i class="fa fa-circle-o"></i>Agenda disponibilité véhicule</a></li>
+                                <li><a href="~/DemandeClient/AgendaChauffeur"><i class="fa fa-circle-o"></i>Agenda disponibilité chauffeur</a></li>
+                            </ul>
+                        </li>
+                    }
+
+
+
+
+                  
+                        <li class="treeview">
+
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>Gestion des comptes</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="active treeview">
+                                    <a href="~/Account/MonProfil">
+                                        <i class="fa fa-circle-o"></i><span>Mon Profil</span>
+                                    </a>
+
+                                </li>
+@if (User.IsInRole("admin") || User.IsInRole("manager") || User.IsInRole("superadmin"))
+{
+                                <li><a href="~/GestionCompte/Collaborateur"><i class="fa fa-circle-o"></i>Fiche Collaborateur</a></li>
+}
+                            </ul>
+                        </li>
+                   
+
+
+
+                </ul>
+            </section>
+
+        </aside>
+
+        <div class="content-wrapper">
+            <!-- Render view -->
+            @RenderBody()
+        </div>
+
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0
+            </div>
+            <strong>Copyright &copy; 2015 <a href="">SoCoFeb</a>.</strong> Tous droits réservés.
+        </footer>
+
+
+    </div>
+
+
+    <script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="~/Content/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Content/ajax/raphael-min.js"></script>
+    <script src="~/Content/plugins/morris/morris.min.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/knob/jquery.knob.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="~/Content/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="~/Content/dist/js/demo.js" type="text/javascript"></script>
+    <script src="~/Content/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+
+</body>
+</html>

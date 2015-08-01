@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ca769f4bbcd4b04ba10adfb8a969a30" Name="Diagram1">
+        <EntityTypeShape EntityType="bdsocofebModel.acompte" Width="1.5" PointX="12.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.acomptefournisseur" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.acomptepersonnel" Width="1.5" PointX="8" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.adresse" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.ajt_collaborator" Width="1.5" PointX="20.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.ajt_photo" Width="1.5" PointX="20.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.article" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.articlesachete" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.aspnetrole" Width="1.5" PointX="15.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.aspnetuserclaim" Width="1.5" PointX="20.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.aspnetuserlogin" Width="1.5" PointX="20.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.aspnetuser" Width="1.5" PointX="18" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.aspnetusersext" Width="1.5" PointX="20.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.banque" Width="1.5" PointX="7.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.bon" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.bonentree" Width="1.5" PointX="13.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.categorie" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.choix" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.encaissementclient" Width="1.5" PointX="10.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.lougueur" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.marque" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.modepayement" Width="1.5" PointX="3" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_applications" Width="1.5" PointX="7.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_membership" Width="1.5" PointX="10.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_paths" Width="1.5" PointX="12.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_personalizationallusers" Width="1.5" PointX="12.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_personalizationperuser" Width="1.5" PointX="14.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_profiles" Width="1.5" PointX="14.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_roles" Width="1.5" PointX="15.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_sessioncleanup" Width="1.5" PointX="15.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_sessions" Width="1.5" PointX="16.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_sitemap" Width="1.5" PointX="10.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_users" Width="1.5" PointX="12.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.my_aspnet_usersinroles" Width="1.5" PointX="14.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.mysql_membership" Width="1.5" PointX="17.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.personne" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.personne_modepayement" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.personnel" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.referencearticle" Width="1.5" PointX="1.5" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.referencebon" Width="1.5" PointX="8.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.sequence" Width="1.5" PointX="10.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.site" Width="1.5" PointX="6" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.souscategorie" Width="1.5" PointX="1.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.stockvariant" Width="1.5" PointX="11.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.taxe" Width="1.5" PointX="19.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.unite" Width="1.5" PointX="0.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.mysql_roles" Width="1.5" PointX="19.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsocofebModel.mysql_usersinroles" Width="1.5" PointX="12.75" PointY="22.25" IsExpanded="true" />
+        <AssociationConnector Association="bdsocofebModel.FK_acompteFournisseur_FOURNISSEUR_idPersonne" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_personne_ADRESSE_idAdresse" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.collaborator_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.photo_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_article_CATEGORIE_refCategorie" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_article_CHOIX_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_article_FOURNISSEUR_idPersonne" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_article_MARQUE_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_article_REFARTICLE_refArticle" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_article_SITE_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_article_SOUSCATEGORIE_refSousCategorie" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_ArticlesAchetes_CATEGORIE_refCategorie" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_ArticlesAchetes_CHOIX_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_ArticlesAchetes_MARQUE_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_ArticlesAchetes_REFARTICLE_refArticle" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_ArticlesAchetes_SOUSCATEGORIE_refSousCategorie" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_ArticlesAchetes_UNITE_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_AspNetUserExt_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_ENCAISSEMENTCLIENT_BON_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_BonEntree_FOURNISSER_idPersonne" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_StockVariant_CATEGORIE_refCategorie" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_StockVariant_CHOIX_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_StockVariant_MARQUE_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.personneModePayementpayementClients_IDMODEPAYEMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_personne_ModePayement_Client_idPersonne" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_personne_ModePayement_Fournisseur_idPersonne" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_StockVariant_FOURNISSEUR_idPersonne" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_StockVariant_REFERENCEARTICLE_refArticle" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.FK_StockVariant_SOUSCATEGORIE_refSousCategorie" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.articlesachetes_lougueurs" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.aspnetuserroles" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.bon_articlesachetes" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.bonentree_article" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.categorie_souscategorie" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.encaissementclient_acompte" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.personne_bon" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.personne_encaissementclient" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.personnel_acomptepersonnel" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsocofebModel.souscategorie_referencearticle" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
